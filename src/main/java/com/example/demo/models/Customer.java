@@ -45,7 +45,7 @@ public class Customer {
         return id;
     }
 
-    public void setMame(String mame) {
+    public void setName(String mame) {
         this.name = mame;
     }
 
