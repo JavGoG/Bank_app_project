@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Account;
 import com.example.demo.models.Customer;
 import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.CustomerRepository;
@@ -42,6 +43,16 @@ public class CustomerController {
         foundCustomer.setPassword(customer.getPassword());
         customerRepository.save(foundCustomer);
         return new ResponseEntity<>(foundCustomer, HttpStatus.OK);
+    }
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<Long> deleteCustomer(@PathVariable Long id){
+        customerRepository.deleteById(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/customers/{customerId}/accounts")
+    public ResponseEntity<List<Account>> getAccountsForCustomer(@PathVariable Long customerId) {
+        return new ResponseEntity<>(accountRepository.findAllByCustomerId(customerId), HttpStatus.OK);
     }
 
 }
